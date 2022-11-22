@@ -1,3 +1,44 @@
-<div *ngFor="let problem of (list$ | async)">
-    {{problem.name}}
+<p>New item:</p>
+<form #form="ngForm" (ngSubmit)="Add(form)"> 
+    <input [(ngModel)] = "problem.name" name="name" placeholder="type text"/>
+    <button type="submit">Add</button>
+</form>
+<div class="row">
+    <div class="col-6">
+        <p>Current items:</p>
+        <ol class="list">
+            <div *ngFor="let problem of (list$ | async)">        
+                <li>
+                    <input type="checkbox" [checked]="problem.isCompleted"
+                    (click)="Complete(problem, problem.id!)"/>
+                    <span *ngIf="problem.isCompleted; else notComplete" >
+                        <span class="text">{{problem.name}}</span>
+                    </span>            
+                    <ng-template #notComplete>
+                        <span>{{problem.name}}</span>
+                    </ng-template>
+                </li>        
+            </div>
+        </ol>
+    </div>
+    <div class="col-6">
+        <p>Current items:</p>
+        <ol class="list">
+            <div *ngFor="let problem of (list$ | async)">        
+                <li>
+                    <input type="checkbox" [checked]="problem.isCompleted"
+                    (click)="Complete(problem, problem.id!)"/>
+                    <span *ngIf="problem.isCompleted; else notComplete" >
+                        <span class="text">{{problem.name}}</span>
+                    </span>            
+                    <ng-template #notComplete>
+                        <span>{{problem.name}}</span>
+                    </ng-template>
+                </li>        
+            </div>
+        </ol>
+    </div>
 </div>
+
+
+

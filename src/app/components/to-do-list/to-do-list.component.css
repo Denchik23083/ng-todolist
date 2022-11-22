@@ -1,7 +1,47 @@
-.list{
-    padding-left: 20px;
+.list{ padding-left: 20px;}
+.input{
+    width: 500px;
+    padding: 15px 20px;
+    margin: 8px 0;
+    box-sizing: border-box;
+}
+.add{
+  background-color: #4CAF50;
+  border: none;
+  color: white;
+  padding: 15px 30px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin-left: 10px;
+  cursor: pointer;
 }
 .text{
     text-decoration-line: line-through;
     text-decoration-color: red;
 }
+.flex{
+    display: flex;
+    flex-wrap: wrap;
+}
+.problem{
+    border: 1px solid black;
+    border-radius: 10px;
+    padding: 10px;
+    margin: 10px 10px 10px 0px;
+    font-size: 20px;
+}
+.to, .from{ 
+    border: none;
+    color: white;
+    margin-left: 5px;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 2px;
+    font-size: 16px;
+    cursor: pointer;
+}
+.from{ background-color: #4CAF50;}
+.to {background-color: red;}
+.li{ margin-bottom: 5px;}

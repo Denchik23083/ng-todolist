@@ -1,14 +1,14 @@
-<p>New item:</p>
+<p style="font-size: 20px;">New item:</p>
 <form #form="ngForm" (ngSubmit)="Add(form)"> 
-    <input [(ngModel)] = "problem.name" name="name" placeholder="type text"/>
-    <button type="submit">Add</button>
+    <input [(ngModel)] = "problem.name" name="name" placeholder="type text" class="input"/>
+    <button type="submit" class="add">Add</button>
 </form>
-<div class="row">
-    <div class="col-6">
+<div class="flex">
+    <div class="problem">
         <p>Current items:</p>
         <ol class="list">
             <div *ngFor="let problem of (list$ | async)">        
-                <li>
+                <li class="li">
                     <input type="checkbox" [checked]="problem.isCompleted"
                     (click)="Complete(problem, problem.id!)"/>
                     <span *ngIf="problem.isCompleted; else notComplete" >
@@ -17,23 +17,23 @@
                     <ng-template #notComplete>
                         <span>{{problem.name}}</span>
                     </ng-template>
+                    <button class="to" (click)="ToArchive(problem.id!)">Archive</button>
                 </li>        
             </div>
         </ol>
     </div>
-    <div class="col-6">
-        <p>Current items:</p>
+    <div class="problem">
+        <p>Archive:</p>
         <ol class="list">
-            <div *ngFor="let problem of (list$ | async)">        
-                <li>
-                    <input type="checkbox" [checked]="problem.isCompleted"
-                    (click)="Complete(problem, problem.id!)"/>
-                    <span *ngIf="problem.isCompleted; else notComplete" >
-                        <span class="text">{{problem.name}}</span>
+            <div *ngFor="let archive of (archive$ | async)">        
+                <li class="li">
+                    <span *ngIf="archive.isCompleted; else notComplete" >
+                        <span class="text">{{archive.name}}</span>
                     </span>            
                     <ng-template #notComplete>
-                        <span>{{problem.name}}</span>
+                        <span>{{archive.name}}</span>
                     </ng-template>
+                    <button class="from" (click)="FromArchive(archive.id!)">List</button>
                 </li>        
             </div>
         </ol>

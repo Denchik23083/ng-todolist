@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { Router } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
-import { ProblemModel, ToDoListService } from 'src/app/services/to-do-list.service';
+import { ArchiveModel, ProblemModel, ToDoListService } from 'src/app/services/to-do-list.service';
 
 @Component({
   selector: 'app-to-do-list',
@@ -17,13 +16,16 @@ export class ToDoListComponent implements OnInit {
   }
 
   list$!: BehaviorSubject<ProblemModel[]>
+  archive$!: BehaviorSubject<ArchiveModel[]>
 
-  constructor(private service: ToDoListService, private router: Router) {
+  constructor(private service: ToDoListService) {
     this.list$ = service.list$;
+    this.archive$ = service.archive$;
    }
 
   ngOnInit(): void {
     this.service.getAll().subscribe();
+    this.service.getArchive().subscribe();
   }
 
   Add(form: NgForm): void{
@@ -37,6 +39,18 @@ export class ToDoListComponent implements OnInit {
     problem.isCompleted = !problem.isCompleted;
     this.service.complete(problem, id).subscribe(() => {      
       window.location.reload();
-    })
+    });
+  }
+
+  ToArchive(id: number): void{
+    this.service.toArchive(id).subscribe(() => {      
+      window.location.reload();
+    });
+  }
+
+  FromArchive(id: number): void{
+    this.service.fromArchive(id).subscribe(() => {      
+      window.location.reload();
+    });
   }
 }
